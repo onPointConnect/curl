@@ -38,6 +38,9 @@ class CurlResponse {
         # Headers regex
         $pattern = '#HTTP/\d\.\d.*?$.*?\r\n\r\n#ims';
         
+        // Hack Lib with replace for http/2 response
+        $response = str_replace("HTTP/2", "HTTP/2.0", $response);
+
         # Extract headers from response
         preg_match_all($pattern, $response, $matches);
         $headers_string = array_pop($matches[0]);
